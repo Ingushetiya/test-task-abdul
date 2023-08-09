@@ -1,0 +1,16 @@
+.wrapper {
+  width: 1048px;
+  height: 906px;
+  margin: 0 auto;
+
+  .filtersAndFavorite {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .content {
+    display: flex;
+    gap: 24px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 360px;
+  padding: 32px;
+  border-radius: 16px;
+  background: #fff;
+  .textInput input {
+    height: 50px;
+  }
+  .dateInput {
+    width: 296px;
+  }
+  .dateInput button {
+    padding: 15px;
+  }
+  .label {
+    color: #424242;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .button {
+    height: 50px;
+    border-radius: 4px;
+    background: linear-gradient(164deg, #41522e 1.1%, #be8022 100%);
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.15);
+  }
+}
