@@ -1,19 +1,21 @@
-import React, { ReactNode } from 'react';
-import styles from './cart-hotel.module.scss';
-import RaitingIcon from '../icons/raiting';
+import styles from './card-hotel.module.scss';
 import FavoriteIcon from '../icons/favorite';
 import cn from 'classnames';
-import { FilterHotel } from '../../search-hotels/types';
 import { useAppSelector } from '../../../hooks/app-use-selector';
 import { useAppDispatch } from '../../../hooks/app-use-dispatch';
-import { toggleFavorite } from '../../favorites/favorite-slice';
+import { setFavorites } from '../../favorites/favorite-slice';
+import { Rating } from '@mantine/core';
+import { CardHotelProps } from './card-hotel.types';
 
-interface Props extends FilterHotel {
-  className?: string;
-  leftIcon?: ReactNode;
-}
-
-export const CartHotel = ({ id, leftIcon, className, fullName, ...rest }: Props) => {
+export const CardHotel = ({
+  id,
+  leftIcon,
+  className,
+  fullName,
+  price,
+  raiting,
+  ...rest
+}: CardHotelProps) => {
   const dispatch = useAppDispatch();
   const favoriteHotels = useAppSelector((state) => state.favorite.favorites);
   const hotel = favoriteHotels.find((item) => item.id === id);
@@ -21,10 +23,10 @@ export const CartHotel = ({ id, leftIcon, className, fullName, ...rest }: Props)
   const handleSaveInFavorites = () => {
     if (hotel) {
       const newFavoriteHotels = favoriteHotels.filter((item) => item.id !== id);
-      dispatch(toggleFavorite(newFavoriteHotels));
+      dispatch(setFavorites(newFavoriteHotels));
     } else {
-      const newFavoriteHotels = [{ id, fullName, ...rest }, ...favoriteHotels];
-      dispatch(toggleFavorite(newFavoriteHotels));
+      const newFavoriteHotels = [{ id, fullName, price, raiting, ...rest }, ...favoriteHotels];
+      dispatch(setFavorites(newFavoriteHotels));
     }
   };
 
@@ -36,7 +38,7 @@ export const CartHotel = ({ id, leftIcon, className, fullName, ...rest }: Props)
           <span className={styles.mainInfoTitle}>{fullName}</span>
           <span className={styles.mainInfoDate}>7 июля 2020 - 1 день</span>
           <div className={styles.mainInfoRaitings}>
-            <RaitingIcon />
+            <Rating value={raiting} readOnly />
           </div>
         </div>
       </div>
@@ -48,7 +50,7 @@ export const CartHotel = ({ id, leftIcon, className, fullName, ...rest }: Props)
         </div>
         <div className={styles.price}>
           <span className={styles.priceText}>Price:</span>
-          <span className={styles.amount}>23924₽</span>
+          <span className={styles.amount}>{price}₽</span>
         </div>
       </div>
     </div>

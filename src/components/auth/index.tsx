@@ -1,14 +1,13 @@
-import React from 'react';
 import styles from './auth.module.scss';
 import { Button, TextInput } from '@mantine/core';
 import { useForm, useWatch } from 'react-hook-form';
 import { AuthForm } from './auth.types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { isEmpty } from '../../utils/isEmpty';
 import { useDispatch } from 'react-redux';
 import { generateToken } from '../../utils/generate-token';
 import { login } from './auth-slice';
+import { AUTH_FORM_DEFAULT_VALUES, VALIDATION_SCHEMA } from './auth.constants';
 
 export const AuthPage = () => {
   const dispatch = useDispatch();
@@ -21,18 +20,10 @@ export const AuthPage = () => {
 
     formState: { errors },
   } = useForm<AuthForm>({
-    defaultValues: {
-      login: '',
-      password: '',
-    },
+    defaultValues: AUTH_FORM_DEFAULT_VALUES,
     mode: 'all',
     reValidateMode: 'onChange',
-    resolver: zodResolver(
-      z.object({
-        login: z.string().email('Введите корректный email'),
-        password: z.string().min(8, 'Минимум 8 символов'),
-      }),
-    ),
+    resolver: zodResolver(VALIDATION_SCHEMA),
   });
   const isWatchLogin = useWatch({ control, name: 'login' });
   const isWatchPassword = useWatch({ control, name: 'password' });

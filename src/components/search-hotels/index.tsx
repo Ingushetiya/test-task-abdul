@@ -14,11 +14,9 @@ export const SearchHotels = () => {
   const [location, setLocation] = useState('Москва');
   const [checkDate, setCheckDate] = useState<Date | null>(new Date());
   const [dayCount, setDayCount] = useState('1');
+
   const checkIn = getValidDateFormat(checkDate ?? new Date());
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getHotelFilter({ location, checkIn, dayCount }));
-  }, [dispatch]);
 
   const handleChangeLocation = (event: ChangeEvent<HTMLInputElement>) =>
     setLocation(event.target.value);
@@ -28,6 +26,10 @@ export const SearchHotels = () => {
   const handleSearch = () => {
     dispatch(getHotelFilter({ location, checkIn, dayCount }));
   };
+
+  useEffect(() => {
+    dispatch(getHotelFilter({ location, checkIn, dayCount }));
+  }, [dispatch]);
 
   return (
     <div className={styles.wrapper}>

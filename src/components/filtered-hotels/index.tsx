@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowForwardIcon } from '../shared/icons/arrowForwardIcon';
 import { Carousel } from '@mantine/carousel';
 import { SLIDER_IMAGE } from './sliderImage';
-import { CartHotel } from '../shared/cart-hotel';
+import { CardHotel } from '../shared/card-hotel';
 import HouseIcon from '../shared/icons/house';
 import styles from './main.module.scss';
 import { useAppSelector } from '../../hooks/app-use-selector';
@@ -39,9 +39,9 @@ export const MainHotelFilter = () => {
       <span className={styles.favoriteHotelsText}>
         Добавлено в Избранное: <span className={styles.favoriteHotelsCount}>3</span> отеля
       </span>
-      <div className={styles.cartHotel}>
+      <div className={styles.cardHotel}>
         {hotels.map((hotel) => (
-          <CartHotel {...hotel} key={hotel.id} leftIcon={<HouseIcon />} />
+          <CardHotel {...hotel} key={hotel.id} leftIcon={<HouseIcon />} />
         ))}
       </div>
     </div>

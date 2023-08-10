@@ -8,6 +8,8 @@ export interface FilterHotel {
   fullName: string;
   id: string;
   label: string;
+  price: number;
+  raiting: number;
   location: {
     lat: number;
     lon: number;
